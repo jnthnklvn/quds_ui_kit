@@ -176,14 +176,17 @@ void showQudsPopupMenu(
     {required BuildContext context,
     required List<QudsPopupMenuBase> items,
     bool useRootNavigator = false,
+    Offset? startOffset,
+    Offset? endOffset,
     Color? backgroundColor}) {
   final RenderBox button = context.findRenderObject()! as RenderBox;
   final RenderBox overlay =
       Navigator.of(context).overlay!.context.findRenderObject()! as RenderBox;
   final RelativeRect position = RelativeRect.fromRect(
     Rect.fromPoints(
-      button.localToGlobal(Offset.zero, ancestor: overlay),
-      button.localToGlobal(button.size.bottomRight(Offset.zero) + Offset.zero,
+      button.localToGlobal(startOffset ?? Offset.zero, ancestor: overlay),
+      button.localToGlobal(
+          endOffset ?? (button.size.bottomRight(Offset.zero) + Offset.zero),
           ancestor: overlay),
     ),
     Offset.zero & overlay.size,
