@@ -108,6 +108,9 @@ class QudsPopupMenuItem extends QudsPopupMenuBase {
   /// The event to be fired when the user press the item
   final VoidCallback onPressed;
 
+  /// The event to be fired when the user long-presses the item
+  final VoidCallback? onLongPressed;
+
   /// Weather to pop when the user press the item.
   final bool popOnTap;
 
@@ -115,6 +118,7 @@ class QudsPopupMenuItem extends QudsPopupMenuBase {
   QudsPopupMenuItem(
       {required this.title,
       required this.onPressed,
+      this.onLongPressed,
       this.popOnTap = true,
       this.subTitle,
       this.leading,
@@ -329,6 +333,7 @@ class _QudsPopupMenuState extends State<_QudsPopupMenu> {
           if (item.popOnTap == true) Navigator.pop(context);
           item.onPressed.call();
         },
+        onLongPress: item.onLongPressed,
         title: item.title,
         subtitle: item.subTitle,
         leading: item.leading,
